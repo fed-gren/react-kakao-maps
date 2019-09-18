@@ -17,6 +17,8 @@
       {
         "corejs": 2
       }
-    ]
+    ],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-object-rest-spread"
   ]
 }
