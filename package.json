@@ -1,0 +1,45 @@
+{
+  "name": "react-kakao-maps",
+  "version": "0.0.1",
+  "description": "React components for using kakao map api",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:lib": "babel src --out-dir lib"
+  },
+  "keywords": [
+    "React",
+    "Kakao",
+    "Daum",
+    "Map"
+  ],
+  "author": {
+    "name": "gren",
+    "email": "deveb22@gmail.com",
+    "url": "https://github.com/fed-gren"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/fed-gren/react-kakao-maps"
+  },
+  "bugs": {
+    "url": "https://github.com/fed-gren/react-kakao-maps/issues"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "babel-runtime": "^6.26.0",
+    "core-js": "2",
+    "react": "^16.9.0",
+    "react-dom": "^16.9.0",
+    "scriptjs": "^2.5.9"
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.6.0",
+    "@babel/core": "^7.6.0",
+    "@babel/plugin-proposal-class-properties": "^7.5.5",
+    "@babel/plugin-proposal-object-rest-spread": "^7.5.5",
+    "@babel/plugin-transform-runtime": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "@babel/preset-react": "^7.0.0"
+  }
+}
