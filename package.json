@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build:lib": "babel src --out-dir lib"
+    "build:lib": "babel src --out-dir lib",
+    "start:lib": "babel src -w --out-dir lib"
   },
   "keywords": [
     "React",
