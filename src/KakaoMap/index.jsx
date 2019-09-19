@@ -1,13 +1,14 @@
-import React, { useEffect } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { useKakaoMapLoad } from "../hooks";
 import MapContainer from "../MapContainer";
+import { defaultMapOptions } from "../constants";
 
 export default function KakaoMap({
   apiUrl,
   width = "500px",
   height = "500px",
-  ...restOptions
+  ...options
 }) {
   const { kakaoMapLoaded, kakaoMapObj } = useKakaoMapLoad({
     apiUrl
@@ -15,18 +16,18 @@ export default function KakaoMap({
 
   const loadHandler = element => {
     if (kakaoMapObj) {
+      const { level, lat, lng, ...restOptions } = options;
       const map = new kakaoMapObj.maps.Map(element, {
-        level: 3,
-        center: new kakaoMapObj.maps.LatLng(33.450701, 126.570667)
+        level: level || defaultMapOptions.level,
+        center: new kakaoMapObj.maps.LatLng(
+          lat || defaultMapOptions.lat,
+          lng || defaultMapOptions.lng
+        )
       });
     }
   };
 
-  return (
-    <MapContainer {...{ width, height }} ref={loadHandler}>
-      width: {width}, height: {height}
-    </MapContainer>
-  );
+  return <MapContainer {...{ width, height }} ref={loadHandler}></MapContainer>;
 }
 
 KakaoMap.propTypes = {
