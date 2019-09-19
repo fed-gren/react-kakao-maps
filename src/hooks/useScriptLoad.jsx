@@ -10,11 +10,7 @@ const useScriptLoad = ({ url }) => {
     scriptjs(url, () => setState({ scriptLoaded: true }));
   }, []);
 
-  if (state.scriptLoaded) {
-    return true;
-  } else {
-    return false;
-  }
+  return state.scriptLoaded ? true : false;
 };
 
 export default useScriptLoad;
