@@ -4,10 +4,13 @@ import { useKakaoMapLoad } from "../hooks";
 import MapContainer from "../MapContainer";
 import { defaultMapOptions } from "../constants";
 
+// export const
+
 export default function KakaoMap({
   apiUrl,
-  width = "500px",
-  height = "500px",
+  width,
+  height,
+  children,
   ...options
 }) {
   const { kakaoMapLoaded, kakaoMapObj } = useKakaoMapLoad({
@@ -16,22 +19,42 @@ export default function KakaoMap({
 
   const loadHandler = element => {
     if (kakaoMapObj) {
-      const { level, lat, lng, ...restOptions } = options;
+      const {
+        level: defaultLevel,
+        lat: defaultLat,
+        lng: defaultLng
+      } = defaultMapOptions;
+
+      const {
+        level = defaultLevel,
+        lat = defaultLat,
+        lng = defaultLng,
+        ...restOptions
+      } = options;
+
       const map = new kakaoMapObj.maps.Map(element, {
-        level: level || defaultMapOptions.level,
-        center: new kakaoMapObj.maps.LatLng(
-          lat || defaultMapOptions.lat,
-          lng || defaultMapOptions.lng
-        )
+        level,
+        center: new kakaoMapObj.maps.LatLng(lat, lng)
       });
     }
   };
 
-  return <MapContainer {...{ width, height }} ref={loadHandler}></MapContainer>;
+  return (
+    <MapContainer
+      {...{
+        width: width || defaultMapOptions.width,
+        height: height || defaultMapOptions.height
+      }}
+      ref={loadHandler}
+    >
+      {children}
+    </MapContainer>
+  );
 }
 
 KakaoMap.propTypes = {
   apiUrl: PropTypes.string.isRequired,
   width: PropTypes.string,
-  height: PropTypes.string
+  height: PropTypes.string,
+  children: PropTypes.element
 };
