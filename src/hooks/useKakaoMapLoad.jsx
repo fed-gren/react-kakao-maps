@@ -11,10 +11,14 @@ export default function useKakaoMapLoad({ apiUrl }) {
   });
 
   useEffect(() => {
-    setState({
-      kakaoMapLoaded: true,
-      kakaoMapObj: window.kakao
-    });
+    const kakao = window.kakao;
+    kakao &&
+      kakao.maps.load(() => {
+        setState({
+          kakaoMapLoaded: true,
+          kakaoMapObj: window.kakao
+        });
+      });
   }, [scriptLoaded]);
 
   return { ...state };
