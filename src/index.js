@@ -1,6 +1,2 @@
-export { default as KakaoMap } from "./KakaoMap";
-export { default as useScriptLoad } from "./hooks/useScriptLoad";
-
-export const greeting = name => {
-  console.log("Hello", name);
-};
+export { default as KakaoMap } from "./MapLib/KakaoMap";
+export { default as Marker } from "./MapLib/Marker";
