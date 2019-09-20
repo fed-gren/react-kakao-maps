@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import PropTypes from "prop-types";
-import { useKakaoMapLoad } from "../hooks";
+import { useKakaoMapLoad } from "../../hooks";
 import MapContainer from "../MapContainer";
-import { defaultMapOptions } from "../constants";
+import { defaultMapOptions } from "../../constants";
 
-// export const
+export const KakaoMapContext = React.createContext({});
 
 export default function KakaoMap({
   apiUrl,
@@ -13,12 +13,15 @@ export default function KakaoMap({
   children,
   ...options
 }) {
-  const { kakaoMapLoaded, kakaoMapObj } = useKakaoMapLoad({
+  const { kakaoMapObj } = useKakaoMapLoad({
     apiUrl
   });
 
-  const loadHandler = element => {
-    if (kakaoMapObj) {
+  const [map, setMap] = useState(null);
+
+  const loadHandler = useCallback(
+    element => {
+      if (!kakaoMapObj) return;
       const {
         level: defaultLevel,
         lat: defaultLat,
@@ -36,8 +39,11 @@ export default function KakaoMap({
         level,
         center: new kakaoMapObj.maps.LatLng(lat, lng)
       });
-    }
-  };
+
+      setMap(map);
+    },
+    [kakaoMapObj]
+  );
 
   return (
     <MapContainer
@@ -47,7 +53,9 @@ export default function KakaoMap({
       }}
       ref={loadHandler}
     >
-      {children}
+      <KakaoMapContext.Provider value={{ kakaoMapObj, map }}>
+        {children}
+      </KakaoMapContext.Provider>
     </MapContainer>
   );
 }
@@ -56,5 +64,5 @@ KakaoMap.propTypes = {
   apiUrl: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-  children: PropTypes.element
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
 };
