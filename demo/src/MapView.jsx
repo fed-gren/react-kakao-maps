@@ -1,5 +1,6 @@
 import React from "react";
-import { KakaoMap, Marker } from "react-kakao-maps";
+import { KakaoMap, Marker, CustomOverlay } from "react-kakao-maps";
+import MyOverlay from "./components/MyOverlay";
 
 export default function MapView() {
   return (
@@ -11,7 +12,12 @@ export default function MapView() {
       lat={37.490826}
       lng={127.03342}
     >
-      <Marker lat={37.490826} lng={127.03342}></Marker>
+      <Marker lat={37.490826} lng={127.03342}>
+        <CustomOverlay
+          content={<MyOverlay message="마커 커스텀오버레이" />}
+          clickable={false}
+        ></CustomOverlay>
+      </Marker>
     </KakaoMap>
   );
 }
