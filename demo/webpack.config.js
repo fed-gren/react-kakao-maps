@@ -41,7 +41,20 @@ module.exports = {
 
   resolve: {
     alias: {
-      "react-dom": "@hot-loader/react-dom"
+      "react-dom": "@hot-loader/react-dom",
+      react: path.resolve(
+        myEnv.parsed.PROJECT_LOCAL_PATH,
+        "./node_modules/react"
+      ),
+      "styled-components": path.resolve(
+        myEnv.parsed.PROJECT_LOCAL_PATH,
+        "./node_modules/styled-components"
+      ),
+      "react-kakao-maps": path.resolve(myEnv.parsed.PROJECT_LOCAL_PATH),
+      "react-dom": path.resolve(
+        myEnv.parsed.PROJECT_LOCAL_PATH,
+        "./node_modules/react-dom"
+      )
     },
     extensions: [".js", ".jsx"]
   },
