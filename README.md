@@ -78,3 +78,30 @@ export default function MapView() {
 
 - lat: marker로 표시할 지점의 위도를 설정합니다. [타입: number][기본값: 33.450701]
 - lng: marker로 표시할 지점의 경도를 설정합니다. [타입: number][기본값: 126.570667]
+
+<br/>
+
+### CustomOverlay
+
+```jsx
+import React from "react";
+import { KakaoMap, CustomOverlay } from "react-kakao-maps";
+
+export default function MapView() {
+  return (
+    <KakaoMap ...options>
+      <CustomOverlay
+        content={<MyOverlay message="마커 커스텀오버레이" />}
+        lat={37.490826}
+        lng={127.03342}
+      ></CustomOverlay>
+    </KakaoMap>
+  );
+}
+```
+
+**props**
+
+- content: 로 표시할 지점의 위도를 설정합니다. [타입: component][required]
+- lat: marker로 표시할 지점의 위도를 설정합니다. [타입: number]
+- lng: marker로 표시할 지점의 경도를 설정합니다. [타입: number]
