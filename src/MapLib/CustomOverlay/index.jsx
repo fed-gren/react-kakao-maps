@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useMemo, useCallback } from "react";
 import PropTypes from "prop-types";
 import { KakaoMapContext } from "../KakaoMap";
 import { MarkerContext } from "../Marker";
@@ -9,33 +9,52 @@ const CustomOverlay = ({ content, lat, lng, ...restOptions }) => {
   const { kakaoMapObj, map } = useContext(KakaoMapContext);
   const { marker, height: markerHeight } = useContext(MarkerContext);
 
-  useEffect(() => {
-    if (map === null || marker === null) return;
+  const getPosition = useCallback(
+    marker => ({
+      overlayLat: marker ? marker.getPosition().getLat() : lat,
+      overlayLng: marker ? marker.getPosition().getLng() : lng
+    }),
+    [marker]
+  );
 
-    const position =
-      marker === undefined
-        ? new kakao.maps.LatLng(lat, lng)
-        : marker.getPosition();
-
-    const overlayContent =
-      marker === undefined
-        ? ReactDOMServer.renderToString(content)
-        : ReactDOMServer.renderToString(
+  const getOverlayContent = useCallback(
+    marker =>
+      marker
+        ? ReactDOMServer.renderToString(
             <CustomOverlayContainer
               {...{ content }}
               bottom={`${markerHeight}px`}
             />
-          );
-    const yAnchor = marker === undefined ? 0.5 : 1;
+          )
+        : ReactDOMServer.renderToString(content),
+    [marker]
+  );
+
+  const getYAnchor = useCallback(marker => (marker ? 1 : 0.5), [marker]);
+
+  const overlayState = useMemo(() => {
+    return {
+      position: getPosition(marker),
+      content: getOverlayContent(marker),
+      yAnchor: getYAnchor(marker)
+    };
+  }, [marker]);
+
+  useMemo(() => {
+    if (!map || !overlayState) return;
+    const { position, content, yAnchor } = overlayState;
 
     new kakaoMapObj.maps.CustomOverlay({
       map,
-      position,
-      content: overlayContent,
+      position: new kakaoMapObj.maps.LatLng(
+        position.overlayLat,
+        position.overlayLng
+      ),
+      content,
       yAnchor,
       ...restOptions
     });
-  }, [map, marker]);
+  }, [map, overlayState]);
 
   return null;
 };
