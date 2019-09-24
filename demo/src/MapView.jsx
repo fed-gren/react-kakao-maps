@@ -16,8 +16,16 @@ export default function MapView() {
         <CustomOverlay
           content={<MyOverlay message="마커 커스텀오버레이" />}
           clickable={false}
+          lat={37.490826}
+          lng={127.03342}
         ></CustomOverlay>
       </Marker>
+      <CustomOverlay
+        content={<MyOverlay message="일반 커스텀오버레이" />}
+        clickable={false}
+        lat={37.490826}
+        lng={127.03342}
+      ></CustomOverlay>
     </KakaoMap>
   );
 }
