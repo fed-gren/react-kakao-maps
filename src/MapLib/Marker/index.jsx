@@ -4,14 +4,14 @@ import { defaultMapOptions } from "../../constants";
 
 export const MarkerContext = React.createContext({});
 
-const Marker = ({ lat, lng, image, children, ...restOptions }) => {
+const Marker = ({ lat, lng, image, children, ...options }) => {
   const { kakaoMapObj, map } = useContext(KakaoMapContext);
   const [state, setState] = useState({
     marker: null,
     width: 0,
     height: 0
   });
-  const { width, height } = restOptions;
+  const { width, height, ...restOptions } = options;
 
   useEffect(() => {
     if (!map) return;
@@ -29,7 +29,8 @@ const Marker = ({ lat, lng, image, children, ...restOptions }) => {
       marker: new kakaoMapObj.maps.Marker({
         map,
         position: new kakaoMapObj.maps.LatLng(markerLat, markerLng),
-        image: marekrImage
+        image: marekrImage,
+        ...restOptions
       }),
       width: markerWidth,
       height: markerHeight

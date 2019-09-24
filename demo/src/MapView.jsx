@@ -12,7 +12,7 @@ export default function MapView() {
       lat={37.490826}
       lng={127.03342}
     >
-      <Marker lat={37.490826} lng={127.03342}>
+      <Marker lat={37.490826} lng={127.03342} opacity={0.5}>
         <CustomOverlay
           content={<MyOverlay message="마커 커스텀오버레이" />}
           clickable={false}

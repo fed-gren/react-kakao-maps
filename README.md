@@ -6,6 +6,7 @@
 
 - Map
 - Marker
+- Custom Overlay
 
 <br/>
 
