@@ -1,6 +1,6 @@
 {
   "name": "react-kakao-maps",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "React components for using kakao map api",
   "main": "lib/index.js",
   "scripts": {
