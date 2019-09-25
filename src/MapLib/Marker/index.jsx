@@ -35,6 +35,8 @@ const Marker = ({ lat, lng, image, children, ...options }) => {
       width: markerWidth,
       height: markerHeight
     });
+
+    return () => state.marker.setMap(null);
   }, [map]);
 
   return (

@@ -1,4 +1,4 @@
-import React, { useContext, useMemo, useCallback } from "react";
+import React, { useContext, useMemo, useCallback, useEffect } from "react";
 import PropTypes from "prop-types";
 import { KakaoMapContext } from "../KakaoMap";
 import { MarkerContext } from "../Marker";
@@ -40,12 +40,11 @@ const CustomOverlay = ({ content, lat, lng, ...restOptions }) => {
     };
   }, [marker]);
 
-  useMemo(() => {
+  useEffect(() => {
     if (!map || !overlayState) return;
     const { position, content, yAnchor } = overlayState;
 
-    new kakaoMapObj.maps.CustomOverlay({
-      map,
+    const customOverlay = new kakaoMapObj.maps.CustomOverlay({
       position: new kakaoMapObj.maps.LatLng(
         position.overlayLat,
         position.overlayLng
@@ -54,6 +53,9 @@ const CustomOverlay = ({ content, lat, lng, ...restOptions }) => {
       yAnchor,
       ...restOptions
     });
+    customOverlay.setMap(map);
+
+    return () => customOverlay.setMap(null);
   }, [map, overlayState]);
 
   return null;
