@@ -6,8 +6,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint ./",
+    "precommit": "lint-staged",
     "build:lib": "babel src --out-dir lib",
     "start:lib": "babel src -w --out-dir lib"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "eslint --fix",
+      "git add"
+    ],
+    "**/*.jsx": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "keywords": [
     "React",
@@ -48,6 +59,9 @@
     "babel-plugin-styled-components": "^1.10.6",
     "eslint": "^6.5.1",
     "eslint-config-google": "^0.14.0",
-    "eslint-plugin-react": "^7.15.0"
+    "eslint-plugin-react": "^7.15.0",
+    "eslint-plugin-react-hooks": "^2.1.1",
+    "husky": "^3.0.7",
+    "lint-staged": "^9.4.1"
   }
 }
