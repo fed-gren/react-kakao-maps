@@ -1,1 +1,1 @@
-export { default as defaultMapOptions } from "./defaultMapOptions";
+export {default as defaultMapOptions} from './defaultMapOptions';
