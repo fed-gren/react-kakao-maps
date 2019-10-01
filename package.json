@@ -10,16 +10,6 @@
     "build:lib": "babel src --out-dir lib",
     "start:lib": "babel src -w --out-dir lib"
   },
-  "lint-staged": {
-    "**/*.js": [
-      "eslint --fix",
-      "git add"
-    ],
-    "**/*.jsx": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
   "keywords": [
     "React",
     "Kakao",
