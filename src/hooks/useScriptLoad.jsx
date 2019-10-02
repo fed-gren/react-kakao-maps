@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import scriptjs from "scriptjs";
+import {useState, useEffect} from 'react';
+import scriptjs from 'scriptjs';
 
-const useScriptLoad = ({ url }) => {
+const useScriptLoad = ({url}) => {
   const [state, setState] = useState({
-    scriptLoaded: false
+    scriptLoaded: false,
   });
 
   useEffect(() => {
-    scriptjs(url, () => setState({ scriptLoaded: true }));
+    scriptjs(url, () => setState({scriptLoaded: true}));
   }, []);
 
   return state.scriptLoaded ? true : false;

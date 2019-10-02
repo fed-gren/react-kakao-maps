@@ -1,8 +1,8 @@
-import React, { useState, useCallback } from "react";
-import PropTypes from "prop-types";
-import { useKakaoMapLoad } from "../../hooks";
-import MapContainer from "../MapContainer";
-import { defaultMapOptions } from "../../constants";
+import React, {useState, useCallback} from 'react';
+import PropTypes from 'prop-types';
+import {useKakaoMapLoad} from '../../hooks';
+import MapContainer from '../MapContainer';
+import {defaultMapOptions} from '../../constants';
 
 export const KakaoMapContext = React.createContext({});
 
@@ -13,47 +13,47 @@ export default function KakaoMap({
   children,
   ...options
 }) {
-  const { kakaoMapObj } = useKakaoMapLoad({
-    apiUrl
+  const {kakaoMapObj} = useKakaoMapLoad({
+    apiUrl,
   });
 
   const [map, setMap] = useState(null);
 
   const loadHandler = useCallback(
-    element => {
-      if (!kakaoMapObj) return;
-      const {
-        level: defaultLevel,
-        lat: defaultLat,
-        lng: defaultLng
-      } = defaultMapOptions;
+      (element) => {
+        if (!kakaoMapObj) return;
+        const {
+          level: defaultLevel,
+          lat: defaultLat,
+          lng: defaultLng,
+        } = defaultMapOptions;
 
-      const {
-        level = defaultLevel,
-        lat = defaultLat,
-        lng = defaultLng,
-        ...restOptions
-      } = options;
+        const {
+          level = defaultLevel,
+          lat = defaultLat,
+          lng = defaultLng,
+          ...restOptions
+        } = options;
 
-      const map = new kakaoMapObj.maps.Map(element, {
-        level,
-        center: new kakaoMapObj.maps.LatLng(lat, lng)
-      });
+        const map = new kakaoMapObj.maps.Map(element, {
+          level,
+          center: new kakaoMapObj.maps.LatLng(lat, lng),
+        });
 
-      setMap(map);
-    },
-    [kakaoMapObj]
+        setMap(map);
+      },
+      [kakaoMapObj]
   );
 
   return (
     <MapContainer
       {...{
         width: width || defaultMapOptions.width,
-        height: height || defaultMapOptions.height
+        height: height || defaultMapOptions.height,
       }}
       ref={loadHandler}
     >
-      <KakaoMapContext.Provider value={{ kakaoMapObj, map }}>
+      <KakaoMapContext.Provider value={{kakaoMapObj, map}}>
         {children}
       </KakaoMapContext.Provider>
     </MapContainer>
@@ -64,5 +64,5 @@ KakaoMap.propTypes = {
   apiUrl: PropTypes.string.isRequired,
   width: PropTypes.string,
   height: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object])
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 };

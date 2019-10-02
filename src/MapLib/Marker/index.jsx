@@ -1,17 +1,17 @@
-import React, { useContext, useEffect, useState } from "react";
-import { KakaoMapContext } from "../KakaoMap";
-import { defaultMapOptions } from "../../constants";
+import React, {useContext, useEffect, useState} from 'react';
+import {KakaoMapContext} from '../KakaoMap';
+import {defaultMapOptions} from '../../constants';
 
 export const MarkerContext = React.createContext({});
 
-const Marker = ({ lat, lng, image, children, ...options }) => {
-  const { kakaoMapObj, map } = useContext(KakaoMapContext);
+const Marker = ({lat, lng, image, children, ...options}) => {
+  const {kakaoMapObj, map} = useContext(KakaoMapContext);
   const [state, setState] = useState({
     marker: null,
     width: 0,
-    height: 0
+    height: 0,
   });
-  const { width, height, ...restOptions } = options;
+  const {width, height, ...restOptions} = options;
 
   useEffect(() => {
     if (!map) return;
@@ -21,8 +21,8 @@ const Marker = ({ lat, lng, image, children, ...options }) => {
     const markerHeight = height || defaultMapOptions.marker.height;
 
     const marekrImage = new kakao.maps.MarkerImage(
-      image || defaultMapOptions.marker.image,
-      new kakao.maps.Size(markerWidth, markerHeight)
+        image || defaultMapOptions.marker.image,
+        new kakao.maps.Size(markerWidth, markerHeight)
     );
 
     setState({
@@ -30,17 +30,17 @@ const Marker = ({ lat, lng, image, children, ...options }) => {
         map,
         position: new kakaoMapObj.maps.LatLng(markerLat, markerLng),
         image: marekrImage,
-        ...restOptions
+        ...restOptions,
       }),
       width: markerWidth,
-      height: markerHeight
+      height: markerHeight,
     });
 
     return () => state.marker.setMap(null);
   }, [map]);
 
   return (
-    <MarkerContext.Provider value={{ ...state }}>
+    <MarkerContext.Provider value={{...state}}>
       {children}
     </MarkerContext.Provider>
   );

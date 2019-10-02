@@ -1,13 +1,13 @@
-import { useState, useEffect } from "react";
-import useScriptLoad from "./useScriptLoad";
+import {useState, useEffect} from 'react';
+import useScriptLoad from './useScriptLoad';
 
-export default function useKakaoMapLoad({ apiUrl }) {
+export default function useKakaoMapLoad({apiUrl}) {
   const [state, setState] = useState({
     kakaoMapLoaded: false,
-    kakaoMapObj: null
+    kakaoMapObj: null,
   });
   const scriptLoaded = useScriptLoad({
-    url: apiUrl
+    url: apiUrl,
   });
 
   useEffect(() => {
@@ -16,10 +16,10 @@ export default function useKakaoMapLoad({ apiUrl }) {
       kakao.maps.load(() => {
         setState({
           kakaoMapLoaded: true,
-          kakaoMapObj: window.kakao
+          kakaoMapObj: window.kakao,
         });
       });
   }, [scriptLoaded]);
 
-  return { ...state };
+  return {...state};
 }
