@@ -4,6 +4,13 @@ import {useKakaoMapLoad} from '../../hooks';
 import MapContainer from '../MapContainer';
 import {defaultMapOptions} from '../../constants';
 
+KakaoMap.propTypes = {
+  apiUrl: PropTypes.string.isRequired,
+  width: PropTypes.string,
+  height: PropTypes.string,
+  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
+};
+
 export const KakaoMapContext = React.createContext({});
 
 export default function KakaoMap({
@@ -32,7 +39,6 @@ export default function KakaoMap({
           level = defaultLevel,
           lat = defaultLat,
           lng = defaultLng,
-          ...restOptions
         } = options;
 
         const map = new kakaoMapObj.maps.Map(element, {
@@ -59,10 +65,3 @@ export default function KakaoMap({
     </MapContainer>
   );
 }
-
-KakaoMap.propTypes = {
-  apiUrl: PropTypes.string.isRequired,
-  width: PropTypes.string,
-  height: PropTypes.string,
-  children: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
-};

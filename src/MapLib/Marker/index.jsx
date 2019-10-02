@@ -1,10 +1,18 @@
 import React, {useContext, useEffect, useState} from 'react';
 import {KakaoMapContext} from '../KakaoMap';
 import {defaultMapOptions} from '../../constants';
+import PropTypes from 'prop-types';
+
+Marker.propTypes = {
+  lat: PropTypes.number,
+  lng: PropTypes.number,
+  image: PropTypes.string,
+  children: PropTypes.object,
+};
 
 export const MarkerContext = React.createContext({});
 
-const Marker = ({lat, lng, image, children, ...options}) => {
+export default function Marker({lat, lng, image, children, ...options}) {
   const {kakaoMapObj, map} = useContext(KakaoMapContext);
   const [state, setState] = useState({
     marker: null,
@@ -45,5 +53,3 @@ const Marker = ({lat, lng, image, children, ...options}) => {
     </MarkerContext.Provider>
   );
 };
-
-export default Marker;

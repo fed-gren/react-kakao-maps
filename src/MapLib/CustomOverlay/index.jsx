@@ -5,7 +5,13 @@ import {MarkerContext} from '../Marker';
 import ReactDOMServer from 'react-dom/server';
 import CustomOverlayContainer from '../CustomgOverlayContainer';
 
-const CustomOverlay = ({content, lat, lng, ...restOptions}) => {
+CustomOverlay.propTypes = {
+  content: PropTypes.object.isRequired,
+  lat: PropTypes.number,
+  lng: PropTypes.number,
+};
+
+export default function CustomOverlay({content, lat, lng, ...restOptions}) {
   const {kakaoMapObj, map} = useContext(KakaoMapContext);
   const {marker, height: markerHeight} = useContext(MarkerContext);
 
@@ -60,11 +66,3 @@ const CustomOverlay = ({content, lat, lng, ...restOptions}) => {
 
   return null;
 };
-
-CustomOverlay.propTypes = {
-  content: PropTypes.object.isRequired,
-  lat: PropTypes.number,
-  lng: PropTypes.number,
-};
-
-export default CustomOverlay;

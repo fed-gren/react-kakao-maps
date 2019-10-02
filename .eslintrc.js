@@ -5,6 +5,7 @@ module.exports = {
   },
   'extends': [
     'google',
+    'plugin:react/recommended'
   ],
   'globals': {
     'Atomics': 'readonly',
@@ -19,9 +20,11 @@ module.exports = {
   },
   'plugins': [
     'react',
-    'react-hooks'
+    'react-hooks',
   ],
   'rules': {
     'react-hooks/rules-of-hooks': 'error',
+    'require-jsdoc': 0,
+    'valid-jsdoc': 0,
   },
 };
