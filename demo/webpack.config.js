@@ -18,6 +18,7 @@ module.exports = {
     index: "index.html",
     port: 8080
   },
+  devtool: 'inline-source-map',
 
   module: {
     rules: [
