@@ -7,7 +7,7 @@ export default function MapView() {
     '    <div class="info">' +
     '        <div class="title">' +
     '            카카오 스페이스닷원' +
-    '            <div class="close" onclick="closeOverlay()" title="닫기">x</div>' +
+    '            <div class="close" onclick="changeOverlayColor(this)" title="닫기">x</div>' +
     '        </div>' +
     '        <div class="body">' +
     '            <div class="img">' +
@@ -23,13 +23,13 @@ export default function MapView() {
     '</div>';
 
   const events = [];
-  const closeHandler = {
-    closeOverlay: ({ overlay }) => {
-      overlay.setMap(null);
-    }
+  const clickHandler = {
+    changeOverlayColor: (target) => {
+      target.closest('.wrap').style.backgroundColor = '#ff0';
+    },
   }
 
-  events.push(closeHandler);
+  events.push(clickHandler);
 
   const styles = [];
   const wrapStyles = {
@@ -78,6 +78,14 @@ export default function MapView() {
         styles={styles}
         events={events}
         lat={37.491846}
+        lng={127.03302}
+      ></CustomOverlayWithString>
+      <CustomOverlayWithString
+        content={customOverlayHtml}
+        clickable={false}
+        styles={styles}
+        events={events}
+        lat={37.491246}
         lng={127.03302}
       ></CustomOverlayWithString>
     </KakaoMap>

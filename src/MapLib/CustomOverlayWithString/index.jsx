@@ -52,24 +52,22 @@ export default function CustomOverlayWithString({
   const applyStyles = (styles) => {
     styles.forEach((styleObj) => {
       const [[className, styles]] = Object.entries(styleObj);
-      const el = document.querySelector(`.${className}`);
-      if (!el) return;
+      const nodes = document.querySelectorAll(`.${className}`);
+      if (nodes.length === 0) return;
 
-      for (const [styleProp, styleValue] of Object.entries(styles)) {
-        if (el.style.hasOwnProperty(styleProp)) el.style[styleProp] = styleValue;
-      }
+      nodes.forEach((node) => {
+        for (const [styleProp, styleValue] of Object.entries(styles)) {
+          if (node.style.hasOwnProperty(styleProp)) node.style[styleProp] = styleValue;
+        }
+      });
     });
   };
 
-  const attachEvents = ({events, overlay, map}) => {
-    const curOverlay = overlay;
-    const curMap = map;
-
+  const attachEvents = ({events}) => {
     events.forEach((eventObj) => {
       const [[eventHandlerName, eventHandlerFunction]] = Object.entries(eventObj);
-      window[eventHandlerName] = (overlay = curOverlay, map = curMap) => {
-        eventHandlerFunction({overlay, map});
-      };
+      window[eventHandlerName] = (target, ...rest) =>
+        eventHandlerFunction.call(this, target, ...rest);
     });
   };
 
@@ -88,7 +86,7 @@ export default function CustomOverlayWithString({
     });
     customOverlay.setMap(map);
     applyStyles(styles);
-    attachEvents({events: events, overlay: customOverlay, map});
+    attachEvents({events: events});
 
     return () => customOverlay.setMap(null);
   }, [map, overlayState]);
