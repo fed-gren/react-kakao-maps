@@ -1,4 +1,4 @@
-import {useContext, useMemo, useCallback, useEffect} from 'react';
+import React, {useContext, useMemo, useCallback, useEffect} from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import {KakaoMapContext} from '../KakaoMap';
