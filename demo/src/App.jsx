@@ -1,5 +1,5 @@
 import { hot } from "react-hot-loader/root";
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import MapView from "./MapView";
 
@@ -14,10 +14,13 @@ const MyStartApp = styled.div`
 `;
 
 export default hot(() => {
+  const [map, setMap] = useState(false);
+
   return (
     <MyStartApp>
       <h1>react-kakao-maps demo</h1>
-      <MapView />
+      <button onClick={() => setMap(!map)}>맵 토글</button>
+      {map && <MapView />}
     </MyStartApp>
   );
 });
