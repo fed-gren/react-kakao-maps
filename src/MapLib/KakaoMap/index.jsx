@@ -28,7 +28,7 @@ export default function KakaoMap({
 
   const loadHandler = useCallback(
       (element) => {
-        if (!kakaoMapObj) return;
+        if (!kakaoMapObj || !element) return;
         const {
           level: defaultLevel,
           lat: defaultLat,
@@ -40,7 +40,6 @@ export default function KakaoMap({
           lat = defaultLat,
           lng = defaultLng,
         } = options;
-
         const map = new kakaoMapObj.maps.Map(element, {
           level,
           center: new kakaoMapObj.maps.LatLng(lat, lng),

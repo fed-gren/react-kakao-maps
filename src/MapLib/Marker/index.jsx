@@ -44,7 +44,9 @@ export default function Marker({lat, lng, image, children, ...options}) {
       height: markerHeight,
     });
 
-    return () => state.marker.setMap(null);
+    return () => {
+      if (state && state.marker) state.marker.setMap(null);
+    };
   }, [map]);
 
   return (
