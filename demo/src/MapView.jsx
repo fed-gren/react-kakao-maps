@@ -32,18 +32,18 @@ export default function MapView() {
   events.push(clickHandler);
 
   const styles = [];
-  const wrapStyles = {
-    'wrap': {
-      backgroundColor: '#fff',
-    },
-  }
 
-  const closeStyles = {
-    'close': {
-      cursor: 'pointer',
-      display: 'inline-block',
-    },
-  }
+  const wrapStyles = `
+    .wrap {background-color: #fff}
+  `;
+
+  const closeStyles = `
+    .close {
+      cursor: pointer;
+      display: inline-block
+    }
+  `;
+
   styles.push(wrapStyles);
   styles.push(closeStyles);
 
@@ -85,7 +85,7 @@ export default function MapView() {
         clickable={false}
         styles={styles}
         events={events}
-        lat={37.491246}
+        lat={37.489246}
         lng={127.03302}
       ></CustomOverlayWithString>
     </KakaoMap>

@@ -50,17 +50,8 @@ export default function CustomOverlayWithString({
   }, [marker]);
 
   const applyStyles = (styles) => {
-    styles.forEach((styleObj) => {
-      const [[className, styles]] = Object.entries(styleObj);
-      const nodes = document.querySelectorAll(`.${className}`);
-      if (nodes.length === 0) return;
-
-      nodes.forEach((node) => {
-        for (const [styleProp, styleValue] of Object.entries(styles)) {
-          if (node.style.hasOwnProperty(styleProp)) node.style[styleProp] = styleValue;
-        }
-      });
-    });
+    const styleSheet = document.styleSheets[0];
+    styles.forEach((styleText) => styleSheet.insertRule(styleText));
   };
 
   const attachEvents = ({events}) => {
