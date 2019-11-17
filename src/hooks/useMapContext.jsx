@@ -1,5 +1,5 @@
 import {useState, useEffect, useContext} from 'react';
-import {KakaoMapContext} from '../KakaoMap';
+import {KakaoMapContext} from '../MapLib/KakaoMap';
 
 const useMapContext = () => {
   const [kakao, setKakao] = useState(null);
