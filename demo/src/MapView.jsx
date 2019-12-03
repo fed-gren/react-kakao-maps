@@ -1,5 +1,5 @@
 import React from "react";
-import { KakaoMap, Marker, CustomOverlay, CustomOverlayWithString } from "react-kakao-maps";
+import { KakaoMap, Marker, CustomOverlay, CustomOverlayWithString, usePlaceService } from "react-kakao-maps";
 import MyOverlay from "./components/MyOverlay";
 
 export default function MapView() {
@@ -21,6 +21,17 @@ export default function MapView() {
     '        </div>' +
     '    </div>' +
     '</div>';
+
+  const { placeService} = usePlaceService();
+  const callback = (result, status) => {
+    if (status === window.kakao.maps.services.Status.OK) {
+      console.log(result);
+    }
+  }
+
+  if(placeService) {
+    placeService.keywordSearch('판교 치킨', callback);
+  }
 
   const events = [];
   const clickHandler = {
